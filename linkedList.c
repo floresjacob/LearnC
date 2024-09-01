@@ -35,9 +35,6 @@ void push(struct Node** head_ref, int new_data) {
     (*head_ref) = new_node;
 }
 
-// Function to append a new node at the end
-{{REWRITTEN_CODE}}
-
 void append(struct Node** head_ref, int new_data) {
     struct Node* new_node = createNode(new_data);
 
