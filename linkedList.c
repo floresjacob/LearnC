@@ -20,22 +20,7 @@ struct Node* createNode(int data) {
     return newNode;
 }
 
-// Function to append a new node at the end
-void append(struct Node** head_ref, int new_data) {
-    struct Node* new_node = createNode(new_data);
-    struct Node* last = *head_ref;
-
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
-        return;
-    }
-
-    while (last->next != NULL)
-        last = last->next;
-
-    last->next = new_node;
-}
-
+// Function to append a new node at the beginning
 void push(struct Node** head_ref, int new_data) {
     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
 
@@ -48,6 +33,31 @@ void push(struct Node** head_ref, int new_data) {
     new_node->data = new_data;
     new_node->next = (*head_ref);
     (*head_ref) = new_node;
+}
+
+// Function to append a new node at the end
+{{REWRITTEN_CODE}}
+
+void append(struct Node** head_ref, int new_data) {
+    struct Node* new_node = createNode(new_data);
+
+    // Check if memory allocation was successful
+    if (new_node == NULL) {
+        printf("Memory allocation failed. Exiting program.\n");
+        exit(1);
+    }
+
+    struct Node* last = *head_ref;
+
+    if (*head_ref == NULL) {
+        *head_ref = new_node;
+        return;
+    }
+
+    while (last->next != NULL)
+        last = last->next;
+
+    last->next = new_node;
 }
 
 // Function to print the linked list
