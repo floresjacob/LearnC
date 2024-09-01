@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Function declarations (forward declarations)
+struct Node* createNode(int data);
+void append(struct Node** head_ref, int new_data);
+void printList(struct Node* node);
+
 // Define the structure for a linked list node
 struct Node {
     int data;
@@ -31,6 +36,20 @@ void append(struct Node** head_ref, int new_data) {
     last->next = new_node;
 }
 
+void push(struct Node** head_ref, int new_data) {
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+
+    // Check if memory allocation was successful
+    if (new_node == NULL) {
+        printf("Memory allocation failed. Exiting program.\n");
+        exit(1);
+    }
+
+    new_node->data = new_data;
+    new_node->next = (*head_ref);
+    (*head_ref) = new_node;
+}
+
 // Function to print the linked list
 void printList(struct Node* node) {
     while (node != NULL) {
@@ -49,6 +68,11 @@ int main() {
     append(&head, 30);
     append(&head, 40);
     append(&head, 50);
+
+    push(&head, 7);
+    push(&head, 1);
+    push(&head, 3);
+    push(&head, 2);
 
     printf("Linked list: ");
     printList(head);
